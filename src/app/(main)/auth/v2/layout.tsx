@@ -4,6 +4,7 @@ import { Command } from "lucide-react";
 
 import { Separator } from "@/components/ui/separator";
 import { APP_CONFIG } from "@/config/app-config";
+import Link from "next/link";
 
 export default function Layout({ children }: Readonly<{ children: ReactNode }>) {
   return (
@@ -13,19 +14,14 @@ export default function Layout({ children }: Readonly<{ children: ReactNode }>) 
           <div className="absolute top-10 space-y-1 px-10 text-primary-foreground">
             <Command className="size-10" />
             <h1 className="font-medium text-2xl">{APP_CONFIG.name}</h1>
-            <p className="text-sm">Design. Build. Launch. Repeat.</p>
+            <p className="text-sm">Voter Finder A simple and fast web app that lets citizens quickly search their voter information using their Voter ID.</p>
           </div>
 
           <div className="absolute bottom-10 flex w-full justify-between px-10">
             <div className="flex-1 space-y-1 text-primary-foreground">
-              <h2 className="font-medium">Ready to launch?</h2>
-              <p className="text-sm">Clone the repo, install dependencies, and your dashboard is live in minutes.</p>
-            </div>
-            <Separator orientation="vertical" className="mx-3 h-auto!" />
-            <div className="flex-1 space-y-1 text-primary-foreground">
               <h2 className="font-medium">Need help?</h2>
               <p className="text-sm">
-                Check out the docs or open an issue on GitHub, community support is just a click away.
+                Contat with <Link href="mrnayem.com">MR Nayem</Link>
               </p>
             </div>
           </div>
