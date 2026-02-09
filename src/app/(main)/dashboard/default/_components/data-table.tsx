@@ -3,7 +3,7 @@
 
 import * as React from "react";
 
-import { Database, Download, Plus } from "lucide-react";
+import { BadgePlus, Database, Download, Plus } from "lucide-react";
 import type { z } from "zod";
 
 import { Badge } from "@/components/ui/badge";
@@ -28,33 +28,22 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof sectionS
 
   return (
     <Tabs defaultValue="outline" className="w-full flex-col justify-start gap-6">
-      <div className="flex items-center justify-end">
-        <Label htmlFor="view-selector" className="sr-only">
-          View
-        </Label>
-        <Select defaultValue="outline">
-          <SelectTrigger className="flex @4xl/main:hidden w-fit" size="sm" id="view-selector">
-            <SelectValue placeholder="Select a view" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="outline">Outline</SelectItem>
-            <SelectItem value="past-performance">Past Performance</SelectItem>
-            <SelectItem value="key-personnel">Key Personnel</SelectItem>
-            <SelectItem value="focus-documents">Focus Documents</SelectItem>
-          </SelectContent>
-        </Select>
-        <div className="flex items-center gap-2">
-
-              <SearchDialog />
+      <div className="flex items-center gap-6 sm:justify-end">
+      <div className="flex flex-col gap-2.5 sm:flex-row items-start sm:items-center sm:gap-2">
+          <SearchDialog />
           <DataTableViewOptions table={table} />
-         <Button variant="outline" size="sm">
-                <Plus />
-                <span className="hidden lg:inline">Import Data</span>
-              </Button>
-                <Button variant="outline" size="sm">
-                <Database />
-                <span className="hidden lg:inline">Export Data</span>
-              </Button>
+          <Button variant="outline" size="sm" className="cursor-pointer">
+            <BadgePlus />
+            <span className="">Add Voter</span>
+          </Button>
+          <Button variant="outline" size="sm" className="cursor-pointer">
+            <Plus />
+            <span className="">Import Database</span>
+          </Button>
+          <Button variant="outline" size="sm" className="cursor-pointer">
+            <Database />
+            <span className="">Export Database</span>
+          </Button>
         </div>
       </div>
       <TabsContent value="outline" className="relative flex flex-col gap-4 overflow-auto">
