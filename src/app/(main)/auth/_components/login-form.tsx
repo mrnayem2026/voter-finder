@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { authApi } from "@/lib/api";
+import { setClientCookie } from "@/lib/cookie.client";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address." }),
@@ -27,13 +29,23 @@ export function LoginForm() {
   });
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    toast("You submitted the following values", {
-      description: (
-        <pre className="mt-2 w-[320px] rounded-md bg-neutral-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+    try {
+      const response = await authApi.login({
+        email: data.email,
+        password: data.password,
+      });
+
+      if (response.success && response.data.token) {
+        // Store token in both localStorage for client and cookies for middleware/SSR
+        localStorage.setItem("token", response.data.token);
+        setClientCookie("token", response.data.token);
+
+        toast.success("Login successful!");
+        window.location.href = "/dashboard";
+      }
+    } catch (error: any) {
+      toast.error(error.message || "Login failed. Please try again.");
+    }
   };
 
   return (

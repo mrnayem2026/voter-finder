@@ -1,11 +1,15 @@
 import { z } from "zod";
 
-export const sectionSchema = z.object({
-  id: z.number(),
-  header: z.string(),
-  type: z.string(),
-  status: z.string(),
-  target: z.string(),
-  limit: z.string(),
-  reviewer: z.string(),
+export const voterSchema = z.object({
+  id: z.string(),
+  voterSlipNumber: z.string(),
+  voterName: z.string(),
+  voterNumber: z.string(),
+  fatherName: z.string(),
+  motherName: z.string(),
+  occupation: z.string().optional(),
+  dateOfBirth: z.string().optional(),
+  address: z.string().optional(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
 });

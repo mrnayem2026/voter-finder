@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar";
+import { deleteClientCookie } from "@/lib/cookie.client";
 import { getInitials } from "@/lib/utils";
 
 export function NavUser({
@@ -66,7 +67,15 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={() => {
+                deleteClientCookie("token");
+                localStorage.removeItem("token");
+                window.location.href = "/auth/v2/login";
+              }}
+              className="cursor-pointer text-destructive focus:text-destructive"
+            >
               <LogOut />
               Log out
             </DropdownMenuItem>
