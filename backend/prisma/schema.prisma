@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  SUPER_ADMIN
+  END_USER
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  role      Role     @default(END_USER)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model Voter {
+  id              String    @id @default(uuid())
+  voterSlipNumber String    @unique @map("voter_slip_number")
+  voterName       String    @map("voter_name")
+  voterNumber     String    @unique @map("voter_number")
+  fatherName      String    @map("father_name")
+  motherName      String    @map("mother_name")
+  occupation      String?
+  dateOfBirth     DateTime? @map("date_of_birth")
+  address         String?
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  @@index([voterName])
+  @@index([voterNumber])
+  @@map("voters")
+}
